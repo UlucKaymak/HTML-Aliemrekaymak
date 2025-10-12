@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ali Emre Kaymak | Ana Sayfa</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=DM+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="../design/aesiyah.png" alt="AliEmreImza" />
+    </div>
+    <nav>
+        <ul>
+            <li><a href="info-sergi_sununhafizasi.html">Sergi</a></li>
+            <li><a href="../index.html">AliEmre</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+
+    <section class="hero-split">
+
+        <div class="hero-left">
+            <img src="../design/paintings/painting01.png" class="hero-image-transition active" />
+            <img src="../design/paintings/painting03.png" class="hero-image-transition" />
+            <img src="../design/paintings/painting02.png" class="hero-image-transition" />
+            <img src="../design/paintings/painting04.png" class="hero-image-transition" />
+            <script>
+                const images = document.querySelectorAll(".hero-image-transition");
+                let currentIndex = 0;
+
+                setInterval(() => {
+                    images[currentIndex].classList.remove("active");
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add("active");
+                }, 3000); // 3 saniye
+            </script>
+        </div>
+
+        <div class="hero-right">
+            <h1>"Su'nun Hafızası"</h1>
+            <span style="font-style: italic; font-size: smaller;"> Gülhane Sarnıcı, Istanbul, 2025</span>
+            <br>
+            <p>
+                İnsanları, kuşları, balıkları ve mekânları ustalıkla resmederek özgün bir resim dili geliştiren
+                sanatçının eserleri ilk kez su yüzüne çıkıyor. Bu kez Gülhane Sarnıcı’nın atmosferine özel olarak
+                ürettiği çalışmalarda balıklar ve su ön planda. Sanatçının denizle kurduğu kişisel bağın ve sahil iç içe
+                geçen yaşamının izlerini taşıyan bu eserler, hem samimi hem de güçlü bir görsel karşılaşma sunuyor.
+
+            </p>
+            <p>Yüzyıllar boyunca suya ev sahipliği yapmış olan tarihî sarnıcın taş duvarları arasında sergilenecek
+                resimler, mekânın belleğiyle sanatçının balıklar dünyasıyla kurduğu bağ arasında güçlü bir yankı
+                oluşturuyor. Eski Sarnıçtaki bu yeni resimlerle izleyici, hem sanatçının bakışına hem de mekânın
+                derinliklerine doğru bir yolculuğa davet ediliyor.
+            </p>
+
+
+            <!-- <p>
+                Ali Emre’nin, İstanbulun en yaşlı sarnıcı için özel olarak üretilmiş eserleri ile bu derinlikli
+                atmosferde izleyiciye hem görsel hem de düşünsel bir yolculuk sunuyor.
+                <br><br>Kuratörlüğünü M. Lütfi Şen yaptığı Sergi süresince ayrıca sanatçı konuşmaları, söyleşiler ve
+                performanslar da gerçekleştirilecek. Böylece “Su’nun Hafızası”, yalnızca bir sergi değil, aynı zamanda
+                farklı disiplinlerin bir araya geldiği dinamik bir buluşma noktası olmayı hedefliyor.
+            </p> -->
+            <div class="buttons">
+                <a href="sergi-sarnic.html" class="btn-outline">Sergiye Göz At</a>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Ali Emre Kaymak. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+
+
+</html>

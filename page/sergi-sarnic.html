@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ali Emre Kaymak | Sergiyi Gez</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../style_sergi.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=DM+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="../design/aesiyah.png" alt="AliEmreImza" />
+    </div>
+    <!-- <div>
+        <h2>"Sarnıç, hafıza"</h2>
+    </div> -->
+    <nav>
+        <ul>
+            <li><a href="info-sergi_sununhafizasi.html">Sergi</a></li>
+            <li><a href="../index.html">AliEmre</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <div class="header">
+        <h2>"Su'nun Hafızası"</h2>
+        <span style="font-style: italic; font-size: smaller;"> Gülhane Sarnıcı, Istanbul, 2025</span>
+    </div>
+
+    <main class="gallery-container">
+        <!-- resimler buraya dolacak -->
+        <script>
+            const imageFolderPath = '../design/resimler/sergi_sarnic/';
+            let numberOfImages = 0;
+            const foundImages = [];
+
+            const galleryContainer = document.querySelector('.gallery-container');
+
+            // List of all image files in the portreler folder
+            const imageFileNames = [
+                "gorsel2.jpeg", "gorsel1.jpeg"
+            ];
+            
+            // Function to load all images
+            async function loadImagesFromFolder() {
+                for (let i = 0; i < imageFileNames.length; i++) {
+                    const imageName = imageFileNames[i];
+                    const imagePath = imageFolderPath + imageName;
+                    const imageShownName = imageName.split('.')[0];
+
+                    try {
+                        const imageExists = await checkImageExists(imagePath);
+                        if (imageExists) {
+                            foundImages.push({
+                                name: imageShownName,
+                                path: imagePath,
+                                index: i + 1
+                            });
+                            numberOfImages++;
+                            createImageElement(imagePath, i + 1, imageName);
+                        }
+                    } catch (error) {
+                        console.log(`Could not load image: ${imageName}`);
+                    }
+                }
+            }
+
+            // Function to check if image exists
+            function checkImageExists(imagePath) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = imagePath;
+                });
+            }
+
+            // Function to create image element
+            function createImageElement(imagePath, index, imageName) {
+                // Her resim için bir section elementi oluşturun
+                const artworkSection = document.createElement('section');
+                artworkSection.classList.add('artwork');
+                artworkSection.setAttribute('data-index', index);
+
+                // Bir img elementi oluşturun
+                const imageElement = document.createElement('img');
+                imageElement.src = imagePath;
+                imageElement.alt = `Portre - ${imageName}`;
+                imageElement.addEventListener('click', () => {
+                    console.log('Image clicked:', imageName);
+                    const modalIndex = foundImages.findIndex(img => img.index === index);
+                    console.log('Opening modal with index:', modalIndex);
+                    openModal(modalIndex);
+                });
+
+                artworkSection.appendChild(imageElement);
+                galleryContainer.appendChild(artworkSection);
+            }
+
+            // Modal functionality
+            let currentImageIndex = 0;
+            let modal, modalImage, modalCaption, closeBtn, prevBtn, nextBtn;
+
+            // Initialize modal elements after DOM is loaded
+            function initializeModal() {
+                modal = document.getElementById('imageModal');
+                modalImage = document.getElementById('modalImage');
+                modalCaption = document.getElementById('modalCaption');
+                closeBtn = document.querySelector('.close');
+                prevBtn = document.getElementById('prevBtn');
+                nextBtn = document.getElementById('nextBtn');
+
+                if (modal && closeBtn && prevBtn && nextBtn) {
+                    // Event listeners
+                    closeBtn.addEventListener('click', closeModal);
+                    nextBtn.addEventListener('click', nextImage);
+                    prevBtn.addEventListener('click', prevImage);
+
+                    // Close modal when clicking outside the image
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            closeModal();
+                        }
+                    });
+
+                    // Keyboard navigation
+                    document.addEventListener('keydown', (e) => {
+                        if (modal.style.display === 'block') {
+                            switch (e.key) {
+                                case 'Escape':
+                                    closeModal();
+                                    break;
+                                case 'ArrowLeft':
+                                    prevImage();
+                                    break;
+                                case 'ArrowRight':
+                                    nextImage();
+                                    break;
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Load all images when page loads
+            document.addEventListener('DOMContentLoaded', () => {
+                initializeModal();
+                loadImagesFromFolder();
+            });
+
+            function openModal(index) {
+                console.log('openModal called with index:', index);
+                console.log('Modal element:', modal);
+                currentImageIndex = index;
+                showImage();
+                if (modal) {
+                    modal.style.display = 'block';
+                    console.log('Modal should be visible now');
+                } else {
+                    console.error('Modal element not found!');
+                }
+            }
+
+            function closeModal() {
+                modal.style.display = 'none';
+            }
+
+            function showImage() {
+                if (foundImages.length > 0 && currentImageIndex < foundImages.length) {
+                    const currentImage = foundImages[currentImageIndex];
+                    modalImage.src = currentImage.path;
+                    modalCaption.textContent = currentImage.name;
+                }
+            }
+
+            function nextImage() {
+                if (foundImages.length > 0) {
+                    currentImageIndex = (currentImageIndex + 1) % foundImages.length;
+                    showImage();
+                }
+            }
+
+            function prevImage() {
+                if (foundImages.length > 0) {
+                    currentImageIndex = (currentImageIndex - 1 + foundImages.length) % foundImages.length;
+                    showImage();
+                }
+            }
+        </script>
+    </main>
+
+    <!-- Modal for extended image view -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <button class="nav-btn prev-btn" id="prevBtn">&#8249;</button>
+            <img id="modalImage" src="" alt="">
+            <button class="nav-btn next-btn" id="nextBtn">&#8250;</button>
+        </div>
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Ali Emre Kaymak. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+
+
+</html>
