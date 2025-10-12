@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ali Emre Kaymak | SARNIÇ</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+    <header class="navbar" style="z-index: -1;">
+        <div class="logo">
+            <img src="../design/aesiyah.png" alt="AliEmreImza" />
+        </div>
+        <nav style="font-family: Outfit">
+            <ul>
+                <li><a href="page/info-sergi_sununhafizasi.html">Sergi</a></li>
+                <li><a href="../index.html">AliEmre</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<body>
+
+    <section class="hero-split">
+
+        <div class="hero-left">
+            <img src="../design/resimler/sergi_sarnic/IMG_6542.png" class="hero-image-transition active" />
+            <img src="../design/resimler/sergi_sarnic/IMG_6553.png" class="hero-image-transition" />
+            <img src="../design/resimler/sergi_sarnic/IMG_6535.png" class="hero-image-transition" />
+            <img src="../design/resimler/sergi_sarnic/IMG_6547.png" class="hero-image-transition" />
+            <script>
+                const images = document.querySelectorAll(".hero-image-transition");
+                let currentIndex = 0;
+
+                setInterval(() => {
+                    images[currentIndex].classList.remove("active");
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add("active");
+                }, 3000); // 3 saniye
+            </script>
+        </div>
+
+        <div class="hero-right">
+            <h1 style="font-family: Outfit">SARNIÇ</h1>
+            <span style="font-style: italic; font-size: smaller;"> Gülhane Sarnıcı, Istanbul, 2025</span>
+            <br>
+
+            <p style="text-align: justify;">
+                    Hafıza, içinde geleneğin şifrelerini taşıyan bir potansiyel enerjidir. Bu enerji, sanat aracılığıyla
+                harekete geçtiğinde geçmişle gelecek arasında bir geçit açar. Sanat, köklerinden aldığı birikimi bugünün
+                diliyle yeniden kurarken, geleneği yeniden tanımlar; onu sabit bir miras değil, yaşayan bir süreç haline
+                getirir. Octavio Paz’ın sözünü ettiği gibi, gelenek kesin bir zamanda oluşmaz; zamanın kendi üzerine
+                kıvrıldığı, geçmişle geleceğin aynı anda var olduğu bir “şimdi”de şekillenir.
+            </p>
+            <p>
+                    Ali Emre, Sarnıç sergisinde kendi hafızasıyla şehrinin, İstanbul’un katmanlı, palimpsest belleğini
+                buluşturuyor. Bu buluşmanın merkezinde, çocukluğunun kimi anılarından süzülen mekandaki balık imgeleri
+                yer alıyor. Çocuk aklında balıklara ait bir mekân olarak yer eden bir sahneler, yıllar içinde dönüşerek
+                hem bireysel hem de kentsel hafızanın bir parçasına dönüşüyor.
+            </p>
+
+            <div class="buttons">
+                <a href="sergi-sarnic.html" class="btn-outline">Sergiye Göz At</a>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <h2>&copy; 2025 Ali Emre Kaymak. Tüm hakları saklıdır.</h2>
+    </footer>
+
+</body>
+
+
+</html>
